@@ -1,7 +1,0 @@
-{
-  "name": "flatline-shopify-kit",
-  "version": "0.1.0",
-  "description": "Flatline's shared Shopify agency knowledge base: reusable fixes, search/log-fix skills, and a knowledge-scout subagent for use across all client theme and app repos.",
-  "author": "Flatline",
-  "keywords": ["shopify", "liquid", "checkout-extensions", "knowledge-base", "agency"]
-}

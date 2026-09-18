@@ -10,7 +10,8 @@ files, and never propose the fix yourself — you hand facts back to the orchest
 agent, which decides what to do with them.
 
 Given a symptom description:
-1. Search `knowledge/**/*.md` and `knowledge/INDEX.md` for matching tags/keywords.
+1. Search `~/Developer/flatline-shopify-kit/knowledge/**/*.md` and
+   `~/Developer/flatline-shopify-kit/knowledge/INDEX.md` for matching tags/keywords.
 2. For any candidate match, read the entry and report: file path, its `symptom`/
    `root_cause` one-liners, and your confidence that it's the same underlying bug
    (not just a similar-sounding surface symptom).
