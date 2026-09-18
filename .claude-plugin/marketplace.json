@@ -1,0 +1,13 @@
+{
+  "name": "flatline-shopify-kit",
+  "owner": "Flatline",
+  "plugins": [
+    {
+      "name": "flatline-shopify-kit",
+      "source": "./",
+      "description": "Flatline's shared Shopify agency knowledge base, skills, and subagents.",
+      "version": "0.1.0",
+      "author": "Flatline"
+    }
+  ]
+}
