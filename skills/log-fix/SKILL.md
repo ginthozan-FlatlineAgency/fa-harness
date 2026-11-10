@@ -13,11 +13,13 @@ Run this after a bug is actually resolved and verified — not mid-investigation
    generalized pattern. If a detail can't be generalized without losing the point,
    leave it out rather than include it verbatim — see the guardrails in this repo's
    `AGENTS.md`.
-3. Pick (or create) a category under `~/Developer/flatline-shopify-kit/knowledge/<category>/`
+3. Pick (or create) a category under `~/Developer/fa-harness/flatline-shopify-kit/knowledge/<category>/`
    and a kebab-case slug. Write `<slug>.md` following the schema in `AGENTS.md`
    (in that same repo).
-4. Add one row to `~/Developer/flatline-shopify-kit/knowledge/INDEX.md`.
-5. Show the user `git -C ~/Developer/flatline-shopify-kit status`/`diff` for the new
+4. Run `python3 ~/Developer/fa-harness/flatline-shopify-kit/scripts/kb.py lint` and then
+   `... kb.py index` (regenerates `knowledge/INDEX.md` — don't hand-edit it). Fix anything
+   lint reports before continuing.
+5. Show the user `git -C ~/Developer/fa-harness/flatline-shopify-kit status`/`diff` for the new
    file and remind them to review, commit, and (once this repo has a remote)
    push/PR it from the **flatline-shopify-kit** repo — never write the entry into
    the client repo you were just working in.

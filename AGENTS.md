@@ -47,7 +47,10 @@ above — not solo-merged, even by the person who owns the client relationship.
 
 ## Maintaining INDEX.md
 
-`knowledge/INDEX.md` is hand-maintained for now (v1). When you add an entry, add a
-row to its table. Once entries accumulate enough that this is tedious, that's the
-signal to build the `knowledge-index` auto-regeneration skill described in the
-original plan — not before.
+`knowledge/INDEX.md` is generated — never edit it by hand. After adding or changing an
+entry run `scripts/kb.py index`; `scripts/kb.py lint` checks the schema and guardrails.
+Both run in the pre-commit hook (installed by `scripts/setup.sh`), so a commit with a
+stale index or a leaked URL/secret/client name is rejected.
+
+Body requirement: a `## Symptom`/`## Root cause` (or `## Diagnosing…`) section and a
+`## Fix` section; other sections are optional.

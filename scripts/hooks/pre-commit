@@ -1,0 +1,4 @@
+#!/bin/sh
+# Blocks commits that leak client details into the shared KB or leave INDEX.md stale.
+cd "$(git rev-parse --show-toplevel)" || exit 1
+python3 scripts/kb.py lint && python3 scripts/kb.py index --check

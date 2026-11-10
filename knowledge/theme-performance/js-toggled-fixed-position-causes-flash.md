@@ -87,3 +87,16 @@ Any "becomes sticky/fixed/floating based on a boolean setting" pattern — cooki
 banners, "back in stock" bars, mobile bottom-nav variants, sticky add-to-cart bars —
 is worth auditing the same way if it visibly jumps on load: check whether the
 positioning class is server-rendered or JS-toggled.
+
+## Related
+
+[[late-dismiss-check-flashes-dismissed-content]] — a second, separate late-JS-flash
+bug found on the same element in the same session: that one is about *visibility*
+(a dismissed/closed state read from storage) being checked after paint; this one is
+about *position*. A sticky **and** dismissible component is worth checking for both.
+
+[[stale-edge-cache-mixes-old-and-new-theme-assets]] — a later bug on the same
+sticky-announcement-bar component, in the same client's theme, that looked identical
+to a CSS specificity bug but wasn't: the current theme's CSS was already correct, and
+the actual cause was a caching service worker serving visitors an old, pre-fix theme
+version. Worth ruling that out first before re-diagnosing this one from scratch.

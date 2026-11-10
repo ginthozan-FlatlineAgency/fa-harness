@@ -9,9 +9,9 @@ Before doing any fresh exploration of a Shopify bug:
    e.g. "checkout extension env var null", "CLS mobile", "noindex collection").
 2. Search the shared knowledge base:
    ```
-   grep -ril -e "<keyword1>" -e "<keyword2>" ~/Developer/flatline-shopify-kit/knowledge
+   grep -ril -e "<keyword1>" -e "<keyword2>" ~/Developer/fa-harness/flatline-shopify-kit/knowledge
    ```
-   and cross-check `~/Developer/flatline-shopify-kit/knowledge/INDEX.md` for matching tags.
+   and cross-check `~/Developer/fa-harness/flatline-shopify-kit/knowledge/INDEX.md` for matching tags.
 3. If a matching entry exists: read it in full, adapt the fix to the current repo
    (file paths and specifics will differ client to client), and say in your response
    which knowledge entry you used.

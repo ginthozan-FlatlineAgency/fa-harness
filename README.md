@@ -21,36 +21,51 @@ that any agent (or human) can grep before starting fresh research.
 
 ```
 knowledge/<category>/<slug>.md   real fix entries — see FORMAT below
-knowledge/INDEX.md               tag/category lookup table
+knowledge/INDEX.md               generated tag/category lookup (scripts/kb.py index)
 skills/search-knowledge/         use BEFORE researching a new bug
 skills/log-fix/                  use AFTER resolving one, to capture it
+skills/prisma-postgres-setup/    vendored from github.com/prisma/skills — provision a
+                                 Prisma Postgres DB via the Management API
 commands/log-fix.md              /log-fix slash command wrapper
 agents/knowledge-scout.md        cheap-model (haiku) retrieval-only subagent
+scripts/setup.sh                 one-shot, idempotent per-machine install
+scripts/kb.py                    `index` (regenerate INDEX.md) and `lint` (schema + guardrails)
+scripts/hooks/pre-commit         runs lint + index check on every commit (enabled by setup.sh)
+scripts/dev.zsh                  `dev <name>` shell shortcut to jump to any repo
+templates/Developer-CLAUDE.md    the ~/Developer/CLAUDE.md that points agents here
 ```
 
-## Using it in a client repo
+## Where it lives
 
-No install step. Claude Code auto-loads skills/agents/commands from `~/.claude/`
-globally, so this repo's `skills/`, `agents/`, and `commands/` are symlinked in:
+```
+~/Developer/
+  CLAUDE.md -> fa-harness/flatline-shopify-kit/templates/Developer-CLAUDE.md
+  fa-harness/
+    flatline-shopify-kit/   this repo (shared)
+    memory/                 personal client notes — separate repo, never shared;
+                            adds /remember and search-memory skills
+  connox/ oger/ matrabike/ wolplein/ jhp/ tricorp/ 8848/   one folder per client
+  flatline/                 agency-owned products
+```
+
+## Install (new machine)
 
 ```bash
-ln -s ~/Developer/flatline-shopify-kit/skills/search-knowledge ~/.claude/skills/search-knowledge
-ln -s ~/Developer/flatline-shopify-kit/skills/log-fix           ~/.claude/skills/log-fix
-ln -s ~/Developer/flatline-shopify-kit/agents/knowledge-scout.md ~/.claude/agents/knowledge-scout.md
-ln -s ~/Developer/flatline-shopify-kit/commands/log-fix.md       ~/.claude/commands/log-fix.md
+git clone <this repo> ~/Developer/fa-harness/flatline-shopify-kit
+~/Developer/fa-harness/flatline-shopify-kit/scripts/setup.sh
 ```
 
-Once linked, `search-knowledge`, `/log-fix`, and the `knowledge-scout` subagent are
-available in **every** Claude Code session on that machine — every client repo,
-automatically, with nothing to install or run per-project.
+`setup.sh` symlinks every skill, agent and command into `~/.claude` (plus the personal
+`memory` skills if that folder exists), links the root `CLAUDE.md`, enables the
+pre-commit hook, and adds the `dev` shortcut to `~/.zshrc`. Claude Code then loads
+all of it in every client repo underneath `~/Developer` — nothing to install per repo.
 
-`~/Developer/CLAUDE.md` (not committed here — it's per-machine, since `~/Developer`
-isn't itself a repo) is what points agents at this repo by convention; Claude Code
-loads it automatically via its directory walk-up whenever you're working inside any
-client repo underneath `~/Developer`.
+## Everyday use
 
-A teammate wanting the same setup just `git clone`s this repo into their own
-`~/Developer` and creates the same 4 symlinks — no plugin or marketplace involved.
+- `dev conn` — cd into the unique repo matching "conn" (`dev` alone lists all).
+- Hit a bug → `search-knowledge` skill / `knowledge-scout` agent first.
+- Fixed something reusable → `/log-fix`, review the diff, commit from this repo.
+- `scripts/kb.py lint` and `scripts/kb.py index` run automatically on commit.
 
 ## Knowledge entry format
 
